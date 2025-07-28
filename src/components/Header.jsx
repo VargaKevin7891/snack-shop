@@ -74,7 +74,7 @@ export default function Header(props) {
 
           {/* Logo Icon */}
           <Box className="logo-desktop-only">
-            <img src={logo} alt="Logo" />
+            <img src={logo} alt="Logo" /> SnackShop
           </Box>
 
           {/* Search */}

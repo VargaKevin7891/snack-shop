@@ -1,7 +1,11 @@
 /* App.css contains the style for each page and component
 Details:
 1. Navbar 
+1.1 Top section (NavBar)
+1.2 Bottom section (NavBar)
+1.3 Offcanvas (Mobile-view)
 
+2. Footer
 
 */
 
@@ -16,7 +20,7 @@ Details:
   font-family: "Roboto", sans-serif;
 }
 
-/* Top section of the Navbar */
+/*1.1 Top section of the Navbar */
 .navbar-top {
   background-color: var(--color-primary) !important;
   box-shadow: none;
@@ -33,14 +37,18 @@ Details:
 .logo-desktop-only {
   display: flex;
   justify-self: center;
+  align-items: center;
   margin-right: 16px;
   padding: 5px 0px;
+  color: var(--color-white);
+  font-size: 18px;
 }
 
 .logo-desktop-only img {
   width: 60px;
   height: 60px;
   border-radius: 50%;
+  margin-right: 12px;
 }
 
 @media screen and (max-width: 960px) {
@@ -94,7 +102,7 @@ Details:
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative; /* Ensure the menu is positioned correctly */
+  position: relative; 
 }
 .navbar-svg {
   margin: 0;
@@ -103,7 +111,7 @@ Details:
   height: 30px !important;
 }
 
-/* Bottom section of Navbar */
+/*1.2 Bottom section of Navbar */
 
 .navbar-bottom {
   display: flex;
@@ -146,7 +154,7 @@ Details:
   }
 }
 
-/* Offcanvas for Mobile-View */
+/*1.3 Offcanvas for Mobile-View */
 
 .menu-button-mobile {
   display: flex;
@@ -176,4 +184,109 @@ Details:
   width: 70px;
   height: 70px;
   border-radius: 50%;
+}
+
+/* 2. Footer */
+.footer {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 40px 24px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: bold;
+  color: var(--color-white);
+  margin-bottom: 12px;
+}
+
+.footer-logo img {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.footer-description {
+  margin-bottom: 16px;
+  color: var(--color-white);
+}
+
+.footer-icons svg {
+  font-size: 28px;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* Social icons and send icon */
+.footer-icons svg:hover,
+.footer-newsletter-icon:hover  {
+  color: var(--color-blue) !important;
+  transform: scale(1.1);
+}
+
+.footer-section-title {
+  font-weight: bold;
+  color: var(--color-white);
+  margin-bottom: 12px;
+}
+
+.footer-link {
+  color: var(--color-white);
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: var(--color-blue);
+}
+
+.footer-newsletter {
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.15);
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  padding:4px 8px;
+}
+
+.footer-newsletter:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.footer-newsletter-icon {
+  padding: 0 8px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white) !important;
+}
+
+.footer-newsletter-input {
+  color: var(--color-white) !important;
+  width: 100%;
+}
+
+@media screen and (min-width: 600px) {
+  .footer-newsletter {
+    margin-left: 0px;
+  }
+
+  .footer-newsletter-input {
+    width: 30ch;
+  }
 }

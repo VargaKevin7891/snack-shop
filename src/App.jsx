@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header.jsx'
+import Footer from './components/Footer.jsx';
 import Home from './pages/Index.jsx'
 import Product from './pages/Product.jsx';
 import '/src/App.css'
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/product" element={<Product addToCart={addToCart}/>} />
       </Routes>
+      <Footer />
     </Router>
   )
 }
