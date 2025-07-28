@@ -1,0 +1,14 @@
+:root {
+  --color-primary: #570861;
+  --color-secondary: #62367F;
+  --color-middle: #471F6F;
+  --color-d-blue: #3D2F79;
+  --color-blue: #323E82;
+  --color-white: #EEF1EF;
+  --color-grey: #000000DE
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
