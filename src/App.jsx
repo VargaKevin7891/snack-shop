@@ -4,6 +4,7 @@ import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx';
 import Home from './pages/Index.jsx'
 import Product from './pages/Product.jsx';
+import ProductList from './pages/ProductList.jsx';
 import '/src/App.css'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product" element={<Product addToCart={addToCart}/>} />
+        <Route path="/products" element={<ProductList />}/>
       </Routes>
       <Footer />
     </Router>

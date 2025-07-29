@@ -23,7 +23,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 import logo from "/snackshop_logo.png"
 
-const categories = ['Home', 'Salty Snack', 'Sweet Snack', 'Healthy Snacks', 'About Us', 'Deals'];
+const categories = ['Home', 'Products', 'Salty Snack', 'Sweet Snack', 'Healthy Snacks', 'About Us', 'Deals'];
 
 export default function Header(props) {
   const [profileOpen, setProfileOpen] = useState(false);
@@ -43,10 +43,12 @@ export default function Header(props) {
   switch (category.toLowerCase()) {
     case 'home':
       return '/';
+    case 'products':
+      return '/products';
     case 'sweet snack':
-      return '/product'; // Example route
+      return '/product';
     case 'salty snack':
-      return '/product'; // You can customize these
+      return '/product';
     case 'healthy snacks':
       return '/product';
     case 'about us':

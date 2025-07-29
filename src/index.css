@@ -5,10 +5,16 @@
   --color-d-blue: #3D2F79;
   --color-blue: #3E4A89;
   --color-white: #EEF1EF;
-  --color-grey: #000000DE
+  --color-dark: #000000DE;
+  --color-grey: #71717A;
+  --color-light-gray: #A1A1AA;
+  --color-d-red: #A90329;
+  --color-l-red: #C44848;
+  --color-green: #22C55E;
 }
 
 body {
   margin: 0;
   padding: 0;
+  font-family: 'Roboto', sans-serif !important;
 }

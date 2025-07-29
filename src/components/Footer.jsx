@@ -9,7 +9,7 @@ export default function Footer() {
     <Box className="footer">
       <Grid container spacing={4} className="footer-container">
         {/* Left Section */}
-        <Grid item xs={12} md={4}>
+        <Grid>
           <Typography variant="h5" className="footer-logo">
            <img src={logo} alt="Logo" /> SnackShop
           </Typography>
@@ -25,7 +25,7 @@ export default function Footer() {
         </Grid>
 
         {/* Useful Links Section */}
-        <Grid item xs={12} md={4}>
+        <Grid>
           <Typography variant="h6" className="footer-section-title">
             Useful Links
           </Typography>
@@ -36,7 +36,7 @@ export default function Footer() {
         </Grid>
 
         {/* Subscribe Newsletter Section */}
-        <Grid item xs={12} md={4}>
+        <Grid>
           <Typography variant="h6" className="footer-section-title">
             Subscribe Newsletter
           </Typography>

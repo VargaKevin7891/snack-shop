@@ -1,11 +1,14 @@
 /* App.css contains the style for each page and component
 Details:
 1. Navbar 
-1.1 Top section (NavBar)
-1.2 Bottom section (NavBar)
-1.3 Offcanvas (Mobile-view)
+1.1 Top Section NavBar
+1.2 Bottom Section Navbar
+1.3 Offcanvas for Mobile-View
 
-2. Footer
+2.Footer
+
+3.ProductCard
+3.1 DiscountBadge
 
 */
 
@@ -102,8 +105,10 @@ Details:
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative; 
+  position: relative;
+  /* Ensure the menu is positioned correctly */
 }
+
 .navbar-svg {
   margin: 0;
   padding: 0;
@@ -111,7 +116,7 @@ Details:
   height: 30px !important;
 }
 
-/*1.2 Bottom section of Navbar */
+/* 1.2 Bottom section of Navbar */
 
 .navbar-bottom {
   display: flex;
@@ -147,14 +152,15 @@ Details:
   }
 
   .navbar-category-button {
-    color: var(--color-grey) !important;
+    color: var(--color-dark) !important;
   }
+
   .navbar-category-button::after {
     background-color: none;
   }
 }
 
-/*1.3 Offcanvas for Mobile-View */
+/* 1.3 Offcanvas for Mobile-View */
 
 .menu-button-mobile {
   display: flex;
@@ -228,7 +234,7 @@ Details:
 
 /* Social icons and send icon */
 .footer-icons svg:hover,
-.footer-newsletter-icon:hover  {
+.footer-newsletter-icon:hover {
   color: var(--color-blue) !important;
   transform: scale(1.1);
 }
@@ -260,7 +266,7 @@ Details:
   flex-direction: row;
   align-items: center;
   justify-content: end;
-  padding:4px 8px;
+  padding: 4px 8px;
 }
 
 .footer-newsletter:hover {
@@ -289,4 +295,165 @@ Details:
   .footer-newsletter-input {
     width: 30ch;
   }
+}
+
+/* 3. Product Card */
+.product-card {
+  width: 360px;
+  background: var(--color-white);
+  border-radius: 15px;
+  box-shadow: 0 5px 20px var(--color-grey);
+  transition: .3s;
+  margin: 20px auto;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px var(--color-grey)
+}
+
+.img {
+  height: 200px;
+  overflow: hidden
+}
+
+.img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s
+}
+
+.card:hover .img img {
+  transform: scale(1.05)
+}
+
+.info {
+  padding: 20px
+}
+
+.cat {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-grey);
+  margin-bottom: 5px
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-dark);
+  margin: 0 0 10px;
+  letter-spacing: -.5px
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px
+}
+
+.price {
+  display: flex;
+  flex-direction: row
+}
+
+.old {
+  font-size: 13px;
+  text-decoration: line-through;
+  color: var(--color-light-gray);
+  margin-bottom: 2px
+}
+
+.new {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-dark);
+}
+
+.btn {
+  background: var(--color-secondary);
+  color: var(--color-white);
+  border: none;
+  border-radius: 10px;
+  padding: 8px 15px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: .3s;
+  box-shadow: 0 3px 10px var(--color-dark)
+}
+
+.btn:hover {
+  background: var(--color-d-blue);
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+.stock {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-green);
+}
+
+.out-of-stock {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-l-red);
+}
+
+@media (max-width:400px) {
+  .card {
+    width: 90%
+  }
+
+  .title {
+    font-size: 16px
+  }
+
+  .img {
+    height: 180px
+  }
+
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px
+  }
+
+  .price {
+    margin-bottom: 5px
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center
+  }
+}
+
+
+/* 3.1 Discount Badge */
+.product-card .discount-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(to right, var(--color-d-red) 0%,  var(--color-l-red) 44%, var(--color-d-red));
+  color: var(--color-white);
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, .2);
+  z-index: 10
 }
