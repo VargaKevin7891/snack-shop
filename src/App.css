@@ -7,8 +7,9 @@ Details:
 
 2.Footer
 
-3.ProductCard
-3.1 DiscountBadge
+3. Products page
+3.1 ProductCard
+
 
 */
 
@@ -297,7 +298,50 @@ Details:
   }
 }
 
-/* 3. Product Card */
+/* 3. Products page */
+.product-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.products-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-blue);
+  text-transform: uppercase;
+}
+
+.product-sorting {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+@media (max-width:600px) {
+  .product-sorting {
+    flex-direction: column;
+    padding: 10px;
+  }
+}
+
+.product-container  .no-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--color-grey);
+  font-size: 16px;
+  font-family: sans-serif;
+}
+
+.product-container  .no-results h2 {
+  font-size: 24px;
+  margin-bottom: 8px;
+  color: var(--color-dark);
+}
+
+/* 3.1 Product Card */
 .product-card {
   width: 360px;
   background: var(--color-white);
@@ -315,27 +359,27 @@ Details:
   box-shadow: 0 10px 25px var(--color-grey)
 }
 
-.img {
+.product-card .img {
   height: 200px;
   overflow: hidden
 }
 
-.img img {
+.product-card .img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform .5s
 }
 
-.card:hover .img img {
+.product-card .card:hover .img img {
   transform: scale(1.05)
 }
 
-.info {
+.product-card .info {
   padding: 20px
 }
 
-.cat {
+.product-card .cat {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 1px;
@@ -344,7 +388,7 @@ Details:
   margin-bottom: 5px
 }
 
-.title {
+.product-card .title {
   font-size: 18px;
   font-weight: 700;
   color: var(--color-dark);
@@ -352,32 +396,32 @@ Details:
   letter-spacing: -.5px
 }
 
-.bottom {
+.product-card .bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px
 }
 
-.price {
+.product-card .price {
   display: flex;
   flex-direction: row
 }
 
-.old {
+.product-card .old {
   font-size: 13px;
   text-decoration: line-through;
   color: var(--color-light-gray);
   margin-bottom: 2px
 }
 
-.new {
+.product-card .new {
   font-size: 20px;
   font-weight: 700;
   color: var(--color-dark);
 }
 
-.btn {
+.product-card .btn {
   background: var(--color-secondary);
   color: var(--color-white);
   border: none;
@@ -393,55 +437,53 @@ Details:
   box-shadow: 0 3px 10px var(--color-dark)
 }
 
-.btn:hover {
+.product-card .btn:hover {
   background: var(--color-d-blue);
   transform: translateY(-2px);
   box-shadow: none;
 }
 
-.stock {
+.product-card .stock {
   font-size: 11px;
   font-weight: 600;
   color: var(--color-green);
 }
 
-.out-of-stock {
+.product-card .out-of-stock {
   font-size: 11px;
   font-weight: 600;
   color: var(--color-l-red);
 }
 
 @media (max-width:400px) {
-  .card {
+  .product-card .card {
     width: 90%
   }
 
-  .title {
+  .product-card .title {
     font-size: 16px
   }
 
-  .img {
+  .product-card .img {
     height: 180px
   }
 
-  .bottom {
+  .product-card .bottom {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px
   }
 
-  .price {
+  .product-card .price {
     margin-bottom: 5px
   }
 
-  .btn {
+  .product-card .btn {
     width: 100%;
     justify-content: center
   }
 }
 
-
-/* 3.1 Discount Badge */
 .product-card .discount-badge {
   position: absolute;
   top: 10px;

@@ -46,11 +46,11 @@ export default function Header(props) {
     case 'products':
       return '/products';
     case 'sweet snack':
-      return '/product';
+      return '/products?category=Sweet Snack';
     case 'salty snack':
-      return '/product';
+      return '/products?category=Salty Snack';
     case 'healthy snacks':
-      return '/product';
+      return '/products?category=Healthy Snack';
     case 'about us':
       return '/about';
     case 'deals':
