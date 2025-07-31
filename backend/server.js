@@ -1,6 +1,6 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
-import { initDb, getAllProducts } from './db.js';
+import { initDb, getAllProducts, getFeaturedProducts } from './db.js';
 
 const fastify = Fastify({
   logger: true
@@ -14,6 +14,10 @@ initDb();
 
 fastify.get('/api/products', async (request, reply) => {
   return getAllProducts(); 
+});
+
+fastify.get('/api/featured-products', async (request, reply) => {
+  return getFeaturedProducts(); 
 });
 
 try {

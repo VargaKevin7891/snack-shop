@@ -7,8 +7,13 @@ Details:
 
 2.Footer
 
-3. Products page
-3.1 ProductCard
+3. Home page
+3.1 HomeCarousel
+3.2 Why-Us section
+3.3 Explore Products section
+
+4. Products page
+4.1 ProductCard
 
 
 */
@@ -298,13 +303,200 @@ Details:
   }
 }
 
-/* 3. Products page */
+/* 3. Home page */
+/* 3.1 HomeCarousel */
+.home-carousel {
+  width: 100%;
+  height: 500px;
+}
+
+.carousel-slide {
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--color-white);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+  padding: 0 16px;
+}
+
+.carousel-title {
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.carousel-description {
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+
+.carousel-button {
+  padding: 10px 24px;
+  font-weight: 600;
+  background-color: var(--color-middle) !important;
+}
+
+.carousel-button a {
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--color-middle); 
+}
+
+.swiper-pagination-bullet {
+  background-color: var(--color-white);
+  opacity: 0.7;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--color-middle);
+  opacity: 1;
+}
+
+/* 3.2 Why-Us section */
+.why-us {
+  background-color: var(--color-white);
+  padding: 60px 20px;
+}
+
+.why-us .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.why-us-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.why-us-subtitle {
+  color: var(--color-grey);
+  margin-bottom: 40px;
+  font-size: 1rem;
+}
+
+.why-us .features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.feature-card {
+  background: white;
+  border-radius: 16px;
+  padding: 30px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 300px;
+  flex: 1 1 250px;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 40px !important;
+  color: var(--color-middle);
+  margin-bottom: 15px;
+}
+
+.feature-card h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  font-size: 0.95rem;
+  color: var(--color-grey);
+}
+
+/* 3.3 Explore Products */
+.explore-snacks {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.snacks-header {
+  text-align: center;
+}
+
+.snacks-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-dark);
+  margin-bottom: 0.5rem;
+}
+
+.snacks-header p {
+  font-size: 1.125rem;
+  color: var(--color-grey);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.snacks-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.explore-more-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.explore-more-button {
+  background-color: var(--color-middle);
+  color: var(--color-white);
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.explore-more-button:hover {
+  background-color: var(--color-blue);
+}
+
+
+@media (max-width: 600px) {
+  .section-header h2 {
+    font-size: 2rem;
+  }
+
+  .section-header p {
+    font-size: 1rem;
+  }
+}
+
+
+/* 4. Products page */
 .product-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
 }
 
 .products-title {
@@ -341,7 +533,7 @@ Details:
   color: var(--color-dark);
 }
 
-/* 3.1 Product Card */
+/* 4.1 Product Card */
 .product-card {
   width: 360px;
   background: var(--color-white);

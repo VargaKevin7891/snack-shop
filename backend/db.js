@@ -36,3 +36,7 @@ export function initDb() {
 export function getAllProducts() {
   return db.prepare('SELECT * FROM products').all();
 }
+
+export function getFeaturedProducts() {
+  return db.prepare('SELECT * FROM products LIMIT 3').all();
+}
