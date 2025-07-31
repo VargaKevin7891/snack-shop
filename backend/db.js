@@ -40,3 +40,7 @@ export function getAllProducts() {
 export function getFeaturedProducts() {
   return db.prepare('SELECT * FROM products LIMIT 3').all();
 }
+
+export function getProduct(pid) {
+  return db.prepare('SELECT * FROM products WHERE id = ?').get(pid);
+}

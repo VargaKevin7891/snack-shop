@@ -1,6 +1,7 @@
 import { Visibility } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
-const ProductCard = (product) => {
+export default function ProductCard (product) {
   return (
     <div className="product-card">
       {product.discount > 0 ? 
@@ -35,14 +36,12 @@ const ProductCard = (product) => {
             )
             }
           </div>
-          <button className="btn">
-            <span>View Product</span>
-            <Visibility />
-          </button>
+          <Link to={`/product?product=${product.id}`} className="btn">
+              <span>View Product</span>
+              <Visibility />
+          </Link>
         </div>
       </div>
     </div>
   );
 };
-
-export default ProductCard;

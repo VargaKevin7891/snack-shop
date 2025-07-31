@@ -10,8 +10,8 @@ import '/src/App.css'
 function App() {
   const [cartCount, setCartCount] = useState(0)
 
-  function addToCart(){
-    setCartCount(prevCount => prevCount +1);
+  function addToCart(incValue){
+    setCartCount(prevCount => prevCount + incValue);
   }
 
   return (
