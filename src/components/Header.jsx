@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   AppBar,
   Box,
@@ -29,6 +29,12 @@ export default function Header(props) {
   const [profileOpen, setProfileOpen] = useState(false);
   const [anchorElProfile, setAnchorElProfile] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [user, setUser] = useState(props.userData);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setUser(props.userData);
+  }, [props.userData]);
 
   function toggleDrawer (open) {
     setDrawerOpen(open);
@@ -60,6 +66,14 @@ export default function Header(props) {
   }
 }
 
+const handleLogout = async () => {
+    await fetch('http://localhost:3001/api/logout', {
+      method: 'POST',
+      credentials: 'include',
+    });
+    props.onLogout();
+    navigate('/');
+  };
 
   return (
     <Box className="navbar">
@@ -119,8 +133,24 @@ export default function Header(props) {
                       open={Boolean(profileOpen)}
                       onClose={handleMenu}
                     >
-                      <MenuItem onClick={handleMenu}>Profile</MenuItem>
-                      <MenuItem onClick={handleMenu}>My account</MenuItem>
+                      {user == null
+                        ? [
+                            <MenuItem key="login" onClick={handleMenu}>
+                              <Link to="/login">Login</Link>
+                            </MenuItem>,
+                            <MenuItem key="register" onClick={handleMenu}>
+                              <Link to="/register">Register</Link>
+                            </MenuItem>
+                          ]
+                        : [
+                            <MenuItem key="profile" onClick={handleMenu}>
+                              <Link to="/profile">Profile</Link>
+                            </MenuItem>,
+                            <MenuItem key="logout" onClick={handleMenu}>
+                              <Button onClick={handleLogout}>Logout</Button>
+                            </MenuItem>
+                          ]
+                      }
                     </Menu>
           </Box>
         </Toolbar>
