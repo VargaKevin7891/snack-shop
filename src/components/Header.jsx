@@ -135,20 +135,28 @@ const handleLogout = async () => {
                     >
                       {user == null
                         ? [
+                            <Link to="/login">
                             <MenuItem key="login" onClick={handleMenu}>
-                              <Link to="/login">Login</Link>
-                            </MenuItem>,
-                            <MenuItem key="register" onClick={handleMenu}>
-                              <Link to="/register">Register</Link>
+                              Login
                             </MenuItem>
+                            </Link>,
+                            <Link to="/register">
+                            <MenuItem key="register" onClick={handleMenu}>
+                              Register
+                            </MenuItem>
+                            </Link>
                           ]
                         : [
+                            <Link to="/profile">
                             <MenuItem key="profile" onClick={handleMenu}>
-                              <Link to="/profile">Profile</Link>
-                            </MenuItem>,
-                            <MenuItem key="logout" onClick={handleMenu}>
-                              <Button onClick={handleLogout}>Logout</Button>
+                              Profile
                             </MenuItem>
+                            </Link>,
+                            <Link onClick={handleLogout}>
+                              <MenuItem key="logout" onClick={handleMenu}>
+                                Logout
+                              </MenuItem>
+                            </Link>
                           ]
                       }
                     </Menu>

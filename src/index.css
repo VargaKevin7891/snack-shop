@@ -23,3 +23,13 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.error {
+  color: var(--color-l-red);
+  text-align: center;
+}
+
+.success {
+  color: var(--color-green);
+  text-align: center;
+}

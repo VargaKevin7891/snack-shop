@@ -1,25 +1,20 @@
 /* App.css contains the style for each page and component
 Details:
 1. Navbar 
-1.1 Top Section NavBar
-1.2 Bottom Section Navbar
-1.3 Offcanvas for Mobile-View
-
+  1.1 Top Section NavBar
+  1.2 Bottom Section Navbar
+  1.3 Offcanvas for Mobile-View
 2.Footer
-
 3. Home page
-3.1 HomeCarousel
-3.2 Why-Us section
-3.3 Explore Products section
-
+  3.1 HomeCarousel
+  3.2 Why-Us section
+  3.3 Explore Products section
 4. Products page
-4.1 ProductCard
-
+  4.1 ProductCard
 5. Product Page
-5.1 Similar Products
-
+  5.1 Similar Products
 6. Login & Register form
-
+7.Profile page
 
 */
 
@@ -862,12 +857,79 @@ Details:
   background-color: var(--color-blue);
 }
 
-.error {
-  color: var(--color-l-red);
-  text-align: center;
+/* 7. Profile page */
+.profile-wrapper {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: var(--color-white);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
 }
 
-.success {
-  color: var(--color-green);
-  text-align: center;
+.profile-heading {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.profile-subheading {
+  font-size: 1rem;
+  color: var(--color-grey);
+  margin-bottom: 2rem;
+}
+
+.tab-container {
+  border-bottom: 1px solid var(--color-white);
+  margin-bottom: 2rem;
+}
+
+.custom-tabs-root {
+  background-color: white;
+}
+
+.custom-tabs-indicator {
+  background-color: var(--color-middle) !important;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.custom-tab-root {
+  color: var(--color-grey);
+  font-weight: 500;
+  text-transform: none;
+  font-size: 1rem;
+}
+
+.custom-tab-selected {
+  color: var(--color-middle) !important;
+}
+
+.tab-btn {
+  background-color: var(--color-middle) !important;
+}
+.tab-btn:hover {
+  background-color: var(--color-blue) !important;
+}
+
+.tab-content {
+  padding: 2rem;
+}
+
+.section-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  color: var(--color-grey);
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .tab-content {
+    padding: 1rem;
+  }
 }

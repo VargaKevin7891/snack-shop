@@ -3,7 +3,7 @@ import fastifySession from '@fastify/session';
 import fastifyCookie from '@fastify/cookie';
 import cors from '@fastify/cors';
 import * as db from './db.js';
-import { loginUser, registerUser } from './services/userService.js';
+import { loginUser, registerUser, updateProfile, changePassword } from './services/userService.js';
 
 const fastify = Fastify({
   logger: true
@@ -12,6 +12,7 @@ const fastify = Fastify({
 await fastify.register(cors, {
   origin: 'http://localhost:5173', // allowing all origins from frontend
   credentials: true,
+  methods: 'HEAD,GET,POST,PUT,DELETE'
 });
 
 await fastify.register(fastifyCookie);
@@ -69,6 +70,31 @@ fastify.post('/api/register', async (req, reply) => {
   }
 });
 
+fastify.put('/api/profile', async (req, reply) => {
+  try {
+    const userId = req.session.user?.id;
+    if (!userId) return reply.code(401).send({ error: 'Unauthorized' });
+
+    await updateProfile(userId, req.body);
+    reply.send({ success: true });
+  } catch (err) {
+    reply.code(err.statusCode || 500).send({ error: err.message || 'Server error' });
+  }
+});
+
+fastify.put('/api/change-password', async (req, reply) => {
+  try {
+    const userId = req.session.user?.id;
+    if (!userId) return reply.code(401).send({ error: 'Unauthorized' });
+
+    const { currentPassword, newPassword } = req.body;
+    await changePassword(userId, currentPassword, newPassword);
+
+    reply.send({ success: true });
+  } catch (err) {
+    reply.code(err.statusCode || 500).send({ error: err.message || 'Server error' });
+  }
+});
 
 fastify.post('/api/logout', async (req, reply) => {
   req.session.destroy();

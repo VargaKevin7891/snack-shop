@@ -24,9 +24,17 @@ export function initDb() {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       username TEXT UNIQUE NOT NULL,
       password TEXT NOT NULL,
-      role TEXT NOT NULL
+      role TEXT NOT NULL,
+      first_name TEXT,
+      last_name TEXT,
+      email TEXT UNIQUE,
+      phone TEXT,
+      address TEXT,
+      city TEXT,
+      zip_code TEXT
     )
   `).run();
+
 
   // products base set-up
   const count = db.prepare('SELECT COUNT(*) as count FROM products').get().count;
@@ -47,11 +55,42 @@ export function initDb() {
 
   // users base set-up
   const existing = db.prepare('SELECT COUNT(*) as count FROM users').get();
+
   if (existing.count === 0) {
-    const insert = db.prepare('INSERT INTO users (username, password, role) VALUES (?, ?, ?)');
-    insert.run('admin', bcrypt.hashSync('SnackBoss2025', 10), 'admin');
-    insert.run('user', bcrypt.hashSync('user123', 10), 'user');
+    const insert = db.prepare(`
+      INSERT INTO users (
+        username, password, role,
+        first_name, last_name, email, phone, address, city, zip_code
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `);
+
+    insert.run(
+      'admin',
+      bcrypt.hashSync('SnackBoss2025', 10),
+      'admin',
+      'Admin',
+      'User',
+      'admin@example.com',
+      '+36 70 1234657',
+      '100 Admin St.',
+      'AdminCity',
+      '1234'
+    );
+
+    insert.run(
+      'user',
+      bcrypt.hashSync('user123', 10),
+      'user',
+      'John',
+      'Doe',
+      'john.doe@example.com',
+      '+36 20 1234567',
+      '123 Main Street',
+      'User City',
+      '4321'
+    );
   }
+
 }
 
 export function getAllProducts() {
@@ -70,6 +109,40 @@ export function getUserByUsername(username) {
   return db.prepare('SELECT * FROM users WHERE username = ?').get(username);
 }
 
+export function getUserById(id) {
+  const query = db.prepare(`SELECT * FROM users WHERE id = ?`);
+  return query.get(id);
+}
+
+export function updateUserProfile(id, profileData) {
+  const query = db.prepare(`
+    UPDATE users SET 
+      first_name = ?, 
+      last_name = ?, 
+      email = ?, 
+      phone = ?, 
+      address = ?, 
+      city = ?, 
+      zip_code = ?
+    WHERE id = ?
+  `);
+  return query.run(
+    profileData.firstName,
+    profileData.lastName,
+    profileData.email,
+    profileData.phone,
+    profileData.address,
+    profileData.city,
+    profileData.zipCode,
+    id
+  );
+}
+
+export function updateUserPassword(id, hashedPassword) {
+  const query = db.prepare(`UPDATE users SET password = ? WHERE id = ?`);
+  return query.run(hashedPassword, id);
+}
+
 export function insertUser(username, hashedPassword) {
   if (userExistsByName(username)) {
     const err = new Error('Username already taken');
@@ -82,7 +155,7 @@ export function insertUser(username, hashedPassword) {
 }
 
 function userExistsByName(username) {
-  const stmt = db.prepare('SELECT 1 FROM users WHERE username = ?');
-  const result = stmt.get(username);
+  const query = db.prepare('SELECT 1 FROM users WHERE username = ?');
+  const result = query.get(username);
   return !!result;
 }
