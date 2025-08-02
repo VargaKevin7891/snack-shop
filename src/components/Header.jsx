@@ -108,11 +108,13 @@ const handleLogout = async () => {
           {/* Cart + Profile */}
           <Box className="profile-button" >
             {/* Cart*/}
-            <IconButton color="inherit" aria-label="cart" sx={{ ml: 1 }}>
+            <Link to="/cart">
+            <IconButton color="inherit" aria-label="cart">
               <Badge badgeContent={props.cartCount} color="error">
                 <ShoppingCartIcon alt="Cart" className='navbar-svg'/>
               </Badge>
             </IconButton>
+            </Link>
 
             {/*Profile */}
             <IconButton onClick={handleMenu} className="avatar-button" color="inherit">
@@ -135,25 +137,25 @@ const handleLogout = async () => {
                     >
                       {user == null
                         ? [
-                            <Link to="/login">
-                            <MenuItem key="login" onClick={handleMenu}>
+                            <Link key="login" to="/login">
+                            <MenuItem  onClick={handleMenu}>
                               Login
                             </MenuItem>
                             </Link>,
-                            <Link to="/register">
-                            <MenuItem key="register" onClick={handleMenu}>
+                            <Link key="register" to="/register">
+                            <MenuItem  onClick={handleMenu}>
                               Register
                             </MenuItem>
                             </Link>
                           ]
                         : [
-                            <Link to="/profile">
-                            <MenuItem key="profile" onClick={handleMenu}>
+                            <Link key="profile" to="/profile">
+                            <MenuItem  onClick={handleMenu}>
                               Profile
                             </MenuItem>
                             </Link>,
-                            <Link onClick={handleLogout}>
-                              <MenuItem key="logout" onClick={handleMenu}>
+                            <Link key="logout" onClick={handleLogout}>
+                              <MenuItem  onClick={handleMenu}>
                                 Logout
                               </MenuItem>
                             </Link>

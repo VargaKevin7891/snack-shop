@@ -14,7 +14,7 @@ export default function ProductPage(props) {
   const location = useLocation();
   const productId = new URLSearchParams(location.search).get('product');
   const [product, setProduct] = useState(null);
-  const [similarProducts, setSimilarProducts] = useState(null);
+  const [similarProducts, setSimilarProducts] = useState([]);
   const [count, setCount] = useState(1);
 
   useEffect(() => {
@@ -63,9 +63,19 @@ export default function ProductPage(props) {
         <Typography variant="h4" className="product-name">
           {product.name}
         </Typography>
-        <Typography variant="h5" className="product-price">
-          ${product.price}
-        </Typography>
+        {product.discount > 0 ?
+          (<>
+          <Typography variant="h5" className="product-price">
+            ${(product.price - (product.price / product.discount)).toFixed(0)} <span className="original-price">{product.price} Ft</span>
+          </Typography>
+          
+          </>)
+          :
+          (<Typography variant="h5" className="product-price">
+            ${product.price}
+          </Typography>)
+        }
+        
         <Typography variant="body1" className="product-description">
           {product.description}
         </Typography>
@@ -89,7 +99,7 @@ export default function ProductPage(props) {
         )}
 
         <Button
-          onClick={() => props.addToCart(count)}
+          onClick={() => props.addToCart(product, count)}
           disabled={product.stock === 0}
           className="add-to-cart-btn"
         >
@@ -97,7 +107,8 @@ export default function ProductPage(props) {
         </Button>
       </Box>
     </Box>
-    <SimilarProductsSlider products={similarProducts}/>
+    {similarProducts.length > 0 ? (<SimilarProductsSlider products={similarProducts}/>) : null}
+    
     </>
   );
 }
