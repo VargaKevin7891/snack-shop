@@ -1,14 +1,15 @@
 import bcrypt from 'bcrypt';
 import * as db from '../db.js';
 
-export async function loginUser(username, password) {
-  const user = db.getUserByUsername(username);
+export async function loginUser(usernameGiven, passwordGiven) {
+  const user = db.getUserByUsername(usernameGiven);
   if (!user) return null;
 
-  const valid = await bcrypt.compare(password, user.password);
+  const valid = await bcrypt.compare(passwordGiven, user.password);
   if (!valid) return null;
 
-  return { id: user.id, username: user.username, role: user.role };
+  const { password, role, ...simpleUser} = user;
+  return { ...simpleUser };
 }
 
 export async function registerUser(username, password) {

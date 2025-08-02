@@ -35,6 +35,38 @@ export function initDb() {
     )
   `).run();
 
+  // orders
+  db.prepare(`
+    CREATE TABLE IF NOT EXISTS orders (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER,
+      first_name TEXT,
+      last_name TEXT,
+      email TEXT,
+      phone TEXT,
+      address TEXT,
+      city TEXT,
+      zip_code TEXT,
+      total INTEGER,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES users(id)
+    );
+  `).run();
+
+  // order-items
+  db.prepare(`
+    CREATE TABLE IF NOT EXISTS order_items (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      order_id INTEGER,
+      product_id INTEGER,
+      name TEXT,
+      image TEXT,
+      quantity INTEGER,
+      price INTEGER,
+      discount INTEGER,
+      FOREIGN KEY (order_id) REFERENCES orders(id)
+    );
+  `).run();
 
   // products base set-up
   const count = db.prepare('SELECT COUNT(*) as count FROM products').get().count;
@@ -105,6 +137,14 @@ export function getProduct(pid) {
   return db.prepare('SELECT * FROM products WHERE id = ?').get(pid);
 }
 
+export function getProductStock(productId) {
+  return db.prepare('SELECT stock FROM products WHERE id = ?').get(productId);
+}
+
+export function decreaseProductStock(productId, quantity) {
+  return db.prepare('UPDATE products SET stock = stock - ? WHERE id = ?').run(quantity, productId);
+}
+
 export function getUserByUsername(username) {
   return db.prepare('SELECT * FROM users WHERE username = ?').get(username);
 }
@@ -153,6 +193,48 @@ export function insertUser(username, hashedPassword) {
 
   return db.prepare('INSERT INTO users (username, password, role) VALUES (?, ?, ?)').run(username, hashedPassword, 'user');
 }
+
+export function insertOrder(order) {
+  return db.prepare(`
+    INSERT INTO orders (
+    user_id, first_name, last_name, email, phone, address, city, zip_code, total) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`).run(
+      order.user_id,
+      order.first_name,
+      order.last_name,
+      order.email,
+      order.phone,
+      order.address,
+      order.city,
+      order.zip_code,
+      order.total
+  );
+}
+
+export function insertOrderItems(orderId, items) {
+  const stmt = db.prepare(`
+    INSERT INTO order_items (order_id, product_id, name, image, quantity, price, discount)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  const insertMany = db.transaction((items) => {
+    for (const [product, quantity] of items) {
+      stmt.run(
+        orderId.lastInsertRowid,
+        product.id,
+        product.name,
+        product.image || '',
+        quantity,
+        product.price,
+        product.discount ?? 0 
+      );
+    }
+  });
+
+  insertMany(items);
+}
+
+
 
 function userExistsByName(username) {
   const query = db.prepare('SELECT 1 FROM users WHERE username = ?');

@@ -4,7 +4,7 @@ import {
   Typography,
   IconButton
 } from '@mui/material';
-import { Remove, Add, Close } from '@mui/icons-material';
+import { Remove, Add, Delete } from '@mui/icons-material';
 
 export default function CartItem({ cartItem, quantity, updateQuantity, removeItem }) {
   return (
@@ -55,7 +55,7 @@ export default function CartItem({ cartItem, quantity, updateQuantity, removeIte
                 onClick={() => removeItem(cartItem?.id)}
                 className="remove-icon"
               >
-                <Close fontSize="small" />
+                <Delete fontSize="small" />
               </IconButton>
             </div>
           </div>

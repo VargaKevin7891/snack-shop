@@ -14,13 +14,13 @@ import {
 export default function Profile() {
   const [tabIndex, setTabIndex] = useState(0);
   const [profile, setProfile] = useState({
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     email: '',
     phone: '',
     address: '',
     city: '',
-    zipCode: '',
+    zip_code: '',
   });
 
   const [passwordForm, setPasswordForm] = useState({
@@ -39,7 +39,6 @@ export default function Profile() {
     const { name, value } = event.target;
     setProfile(prev => ({ ...prev, [name]: value }));
   };
-
 
   useEffect(() => {
     fetch('http://localhost:3001/api/getUser', {
@@ -136,13 +135,13 @@ export default function Profile() {
             </Typography>
             <Grid container spacing={2}>
               <Grid>
-                <TextField name="firstName" label="First Name" fullWidth variant="outlined"
-                  value={profile.firstName}
+                <TextField name="first_name" label="First Name" fullWidth variant="outlined"
+                  value={profile.first_name}
                   onChange={handleProfileChange}/>
               </Grid>
               <Grid>
-                <TextField name="lastName" label="Last Name" fullWidth variant="outlined"
-                  value={profile.lastName}
+                <TextField name="last_name" label="Last Name" fullWidth variant="outlined"
+                  value={profile.last_name}
                   onChange={handleProfileChange} />
               </Grid>
               <Grid>
@@ -166,8 +165,8 @@ export default function Profile() {
                   onChange={handleProfileChange} />
               </Grid>
               <Grid>
-                <TextField name="zipCode" label="ZIP Code" fullWidth variant="outlined"
-                  value={profile.zipCode}
+                <TextField name="zip_code" label="ZIP Code" fullWidth variant="outlined"
+                  value={profile.zip_code}
                   onChange={handleProfileChange} />
               </Grid>
               <Grid>

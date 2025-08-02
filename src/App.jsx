@@ -10,11 +10,20 @@ import Profile from './pages/Profile.jsx';
 import '/src/App.css'
 import Register from './pages/Register.jsx';
 import Cart from './pages/Cart.jsx';
+import Checkout from './pages/Checkout.jsx';
 
 function App() {
   const [user, setUser] = useState(null);
   const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
+
+  let subtotal = cartItems.reduce((sum, [product, quantity]) => {
+    const price = (product.discount > 0 ? (product.price - (product.price / product.discount)) : product.price).toFixed(0);
+    return sum + (price * quantity);
+  }, 0);
+  const tax = subtotal * 0.25;
+  subtotal = subtotal - tax;
+  const total = subtotal + tax;
 
   const addToCart = (product, quantity = 1) => {
     setCartItems((prev) => {
@@ -46,6 +55,10 @@ function App() {
     setCartItems((prev) => prev.filter(([p]) => p.id !== productId));
   };
 
+  const clearCart = () => {
+    setCartItems(() => []);
+  }
+
   function onLogout(){
     setUser(null);
   }
@@ -66,7 +79,8 @@ function App() {
         <Route path="/profile" element={<Profile userData={user} />} />
         <Route path="/product" element={<Product addToCart={addToCart}/>} />
         <Route path="/products" element={<ProductList />}/>
-        <Route path="/cart" element={<Cart cartCount={cartCount} cartItems={cartItems} updateQuantity={updateQuantity} removeItem={removeItem}/>} />
+        <Route path="/cart" element={<Cart cartCount={cartCount} cartItems={cartItems} updateQuantity={updateQuantity} clearCart={clearCart} removeItem={removeItem} subtotal={subtotal} tax={tax} total={total} />} />
+        <Route path="/checkout" element={<Checkout user={user} cartCount={cartCount} cartItems={cartItems} subtotal={subtotal} tax={tax} total={total} clearCart={clearCart} />} />
       </Routes>
       <Footer />
     </Router>

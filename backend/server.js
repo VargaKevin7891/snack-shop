@@ -4,6 +4,7 @@ import fastifyCookie from '@fastify/cookie';
 import cors from '@fastify/cors';
 import * as db from './db.js';
 import { loginUser, registerUser, updateProfile, changePassword } from './services/userService.js';
+import { placeOrder } from './services/orderService.js';
 
 const fastify = Fastify({
   logger: true
@@ -107,6 +108,16 @@ fastify.get('/api/getUser', async (req, reply) => {
   }
 
   reply.send(req.session.user);
+});
+
+fastify.post('/api/order', async (request, reply) => {
+  try {
+    const result = placeOrder(request.body);
+    reply.send({ success: true, orderId: result.orderId });
+  } catch (err) {
+    console.error(err);
+    reply.status(500).send({ success: false, error: 'Failed to place order' });
+  }
 });
 
 fastify.get('/api/admin-data', async (req, reply) => {

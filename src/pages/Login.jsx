@@ -33,7 +33,6 @@ export default function Login({ setUser }) {
 
   function handleLogin(userData) {
     setUser(userData);
-
     if (userData.role === 'admin') {
       navigate('/admin');
     } else {
