@@ -16,6 +16,8 @@ Details:
 6. Login & Register form
 7. Profile page
 8. Cart page
+  8.1 Cart item
+9. OrderConfirmation page 
 
 */
 
@@ -821,12 +823,14 @@ Details:
 /* 6. Login & Register form */
 .auth-form {
   max-width: 400px;
+  min-height: 400px;
   margin: 2rem auto;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 1rem;
 }
 
@@ -868,6 +872,7 @@ Details:
 /* 7. Profile page */
 .profile-wrapper {
   max-width: 1000px;
+  min-height: 450px;
   margin: 2rem auto;
   padding: 2rem;
   background-color: var(--color-white);
@@ -1128,7 +1133,7 @@ Details:
   }
 
   .cart-item-left {
-    display: g;
+    display: grid;
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -1178,4 +1183,115 @@ Details:
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+/* 9. OrderConfirmation page */
+.order-confirmation-container {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.order-confirmation-title {
+  font-weight: bold !important;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.order-confirmation-subtitle {
+  text-align: center;
+  color: var(--color-grey);
+  margin-bottom: 2rem;
+}
+
+.order-confirmation-box,
+.shipping-box {
+  width: 100%;
+  max-width: 700px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+}
+
+.order-confirmation-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-confirmation-section-title {
+  font-weight: 600 !important;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.order-confirmation-id {
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.order-confirmation-summary {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* 9.1 OrderItem */
+.order-confirmation-item {
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.order-confirmation-item-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-confirmation-item-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.order-confirmation-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.order-confirmation-item-title {
+  font-weight: 600 !important;
+}
+
+@media (max-width: 768px) {
+  .order-confirmation-container{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: 100%;
+  }
+
+  .order-confirmation-box,
+  .shipping-box {
+    max-width: 310px;
+    padding: 1rem;
+  }
+
+  .order-confirmation-info {
+    flex-direction: column;
+  }
+
+  .order-confirmation-item {
+    padding: 5px;
+  }
 }

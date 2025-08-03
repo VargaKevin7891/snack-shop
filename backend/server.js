@@ -120,6 +120,26 @@ fastify.post('/api/order', async (request, reply) => {
   }
 });
 
+fastify.get('/api/order/:id', async (request, reply) => {
+  const { id } = request.params;
+  const order = db.getOrder(id);
+  if (!order) {
+    return reply.code(404).send({ error: 'Order not found' });
+  }
+
+  return order;
+});
+
+fastify.get('/api/order-items/:id', async (request, reply) => {
+  const { id } = request.params;
+  const orderItems = db.getOrderItems(id);
+  if (!orderItems) {
+    return reply.code(404).send({ error: 'Order not found' });
+  }
+
+  return orderItems;
+});
+
 fastify.get('/api/admin-data', async (req, reply) => {
   const user = req.session.user;
   if (!user || user.role !== 'admin') {

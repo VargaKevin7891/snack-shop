@@ -8,7 +8,7 @@ export async function loginUser(usernameGiven, passwordGiven) {
   const valid = await bcrypt.compare(passwordGiven, user.password);
   if (!valid) return null;
 
-  const { password, role, ...simpleUser} = user;
+  const { password, ...simpleUser} = user;
   return { ...simpleUser };
 }
 

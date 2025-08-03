@@ -11,6 +11,8 @@ import '/src/App.css'
 import Register from './pages/Register.jsx';
 import Cart from './pages/Cart.jsx';
 import Checkout from './pages/Checkout.jsx';
+import OrderConfirmation from './pages/OrderConfirmation.jsx';
+import { PrivateRoute, AdminRoute } from './RouterControll.jsx';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -73,14 +75,28 @@ function App() {
     <Router>
       <Header cartCount={cartCount} userData={user} onLogout={onLogout}/>
       <Routes>
-        <Route path="/" element={<Home />} />
+        {/* Public routes */}
         <Route path="/login" element={<Login setUser={setUser}/>} />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile userData={user} />} />
-        <Route path="/product" element={<Product addToCart={addToCart}/>} />
-        <Route path="/products" element={<ProductList />}/>
-        <Route path="/cart" element={<Cart cartCount={cartCount} cartItems={cartItems} updateQuantity={updateQuantity} clearCart={clearCart} removeItem={removeItem} subtotal={subtotal} tax={tax} total={total} />} />
-        <Route path="/checkout" element={<Checkout user={user} cartCount={cartCount} cartItems={cartItems} subtotal={subtotal} tax={tax} total={total} clearCart={clearCart} />} />
+
+        {/* Private routes */}
+        <Route element={<PrivateRoute isAllowed={!!user}/>}>
+          <Route path="/" element={<Home />}/>        
+          <Route path="/profile" element={<Profile userData={user} />}/>
+          <Route path="/product" element={<Product addToCart={addToCart}/>} />
+          <Route path="/products" element={<ProductList />}/>
+          <Route path="/cart" element={<Cart cartCount={cartCount} cartItems={cartItems} updateQuantity={updateQuantity} clearCart={clearCart} removeItem={removeItem} subtotal={subtotal} tax={tax} total={total} />} />
+          <Route path="/checkout" element={<Checkout user={user} cartCount={cartCount} cartItems={cartItems} subtotal={subtotal} tax={tax} total={total} clearCart={clearCart} />} />
+          <Route path="/order-confirmation" element={<OrderConfirmation />}/>
+        </Route>
+        
+
+        {/* Admin routes */}
+        <Route element={<AdminRoute isAdmin={user?.role == "admin"}/>}>
+          <Route path="/admin" element={<h1>Admin page!</h1>} />
+          <Route path="/admin/page" element={<h1>Admin Page-page!</h1>} />
+        </Route>
+        
       </Routes>
       <Footer />
     </Router>

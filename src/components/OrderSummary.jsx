@@ -3,8 +3,11 @@ import {
   Button, Card, CardContent, CardHeader, Divider
 } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function OrderSummary({ subtotal, tax, total, cartCount, textBtn, targetBtn, clearCart, orderData }) {
+  const navigate = useNavigate();
+
   async function handlePlaceOrder() {
     try {
       const res = await fetch('http://localhost:3001/api/order', {
@@ -20,8 +23,8 @@ export default function OrderSummary({ subtotal, tax, total, cartCount, textBtn,
       }
 
       const result = await res.json();
-      alert(`Order Placed! ID: ${result.orderId}`);
       clearCart();
+      navigate("/order-confirmation?orderId="+result.orderId.lastInsertRowid)
     } catch (err) {
       alert(`Failed: ${err.message}`);
     }

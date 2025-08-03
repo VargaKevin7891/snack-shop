@@ -63,7 +63,6 @@ export function initDb() {
       image TEXT,
       quantity INTEGER,
       price INTEGER,
-      discount INTEGER,
       FOREIGN KEY (order_id) REFERENCES orders(id)
     );
   `).run();
@@ -154,6 +153,14 @@ export function getUserById(id) {
   return query.get(id);
 }
 
+export function getOrder(id) {
+  return db.prepare('SELECT * FROM orders WHERE id = ?').get(id);
+}
+
+export function getOrderItems(id) {
+  return db.prepare('SELECT * FROM order_items WHERE order_id = ?').all(id);
+}
+
 export function updateUserProfile(id, profileData) {
   const query = db.prepare(`
     UPDATE users SET 
@@ -213,8 +220,8 @@ export function insertOrder(order) {
 
 export function insertOrderItems(orderId, items) {
   const stmt = db.prepare(`
-    INSERT INTO order_items (order_id, product_id, name, image, quantity, price, discount)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO order_items (order_id, product_id, name, image, quantity, price)
+    VALUES (?, ?, ?, ?, ?, ?)
   `);
 
   const insertMany = db.transaction((items) => {
@@ -225,8 +232,7 @@ export function insertOrderItems(orderId, items) {
         product.name,
         product.image || '',
         quantity,
-        product.price,
-        product.discount ?? 0 
+        (product.discount <= 0 ? product.price : (product.price - (product.price / product.discount)).toFixed(0)),
       );
     }
   });
