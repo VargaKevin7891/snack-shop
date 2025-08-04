@@ -90,7 +90,7 @@ async function handleSaveProduct() {
   if (isEditMode && editIndex !== null) {
     // Update existing product
     try {
-      const response = await fetch(`http://localhost:3001/api/product/${newProduct.id}`, {
+      const response = await fetch(`http://localhost:3001/api/products/${newProduct.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -124,7 +124,7 @@ async function handleSaveProduct() {
         stock: parseInt(newProduct.stock) || 0,
       };
 
-      const response = await fetch('http://localhost:3001/api/product', {
+      const response = await fetch('http://localhost:3001/api/products', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -155,7 +155,7 @@ async function handleSaveProduct() {
 
   async function handleDeleteProduct(id) {
   try {
-    const response = await fetch(`http://localhost:3001/api/product/${id}`, {
+    const response = await fetch(`http://localhost:3001/api/products/${id}`, {
       method: 'DELETE',
       credentials: 'include',
     });

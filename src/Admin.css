@@ -135,6 +135,10 @@
   margin-top: 1rem;
 }
 
+.bold {
+  font-weight: bold !important;
+}
+
 /* 3. Products */
 .admin-products-container {
   padding: 2rem;
@@ -164,6 +168,12 @@
   border: 1px solid var(--color-secondary);
   height: 150px;
   width: 350px;
+}
+
+@media (max-width: 768px) {
+  .admin-product-card {
+    height: 100%;
+  }
 }
 
 .admin-product-info {
@@ -223,4 +233,33 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
+}
+
+/* 4. Orders */
+/* 4.1 Order details dialog */
+.order-info-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.product-list-box {
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.order-dialog-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.order-dialog-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
 }

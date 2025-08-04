@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   AppBar,
@@ -23,7 +23,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 import logo from "/snackshop_logo.png"
-import { Dashboard, Inventory, ShoppingCart, Group, Logout } from '@mui/icons-material';
+import { Dashboard, Inventory, ShoppingCart, Logout } from '@mui/icons-material';
 
 const categories = ['Home', 'Products', 'Salty Snack', 'Sweet Snack', 'Healthy Snacks'];
 
@@ -106,12 +106,10 @@ const handleLogout = async () => {
             </Link>
           </ListItem>
           <ListItem>
-            <ListItemIcon><ShoppingCart /></ListItemIcon>
-            <ListItemText primary="Orders" />
-          </ListItem>
-          <ListItem>
-            <ListItemIcon><Group /></ListItemIcon>
-            <ListItemText primary="Customers" />
+            <Link to="/admin/orders">
+              <ListItemIcon><ShoppingCart /></ListItemIcon>
+              <ListItemText primary="Orders" />
+            </Link>
           </ListItem>
           <ListItem>
             <Link onClick={handleLogout}>

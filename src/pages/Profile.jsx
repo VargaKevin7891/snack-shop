@@ -121,7 +121,6 @@ export default function Profile({ userData, setUser}) {
         >
           <Tab label="Profile Info" classes={{ root: 'custom-tab-root', selected: 'custom-tab-selected' }} />
           <Tab label="Change Password" classes={{ root: 'custom-tab-root', selected: 'custom-tab-selected' }} />
-          <Tab label="Order History" classes={{ root: 'custom-tab-root', selected: 'custom-tab-selected' }} />
         </Tabs>
       </Box>
 
@@ -213,13 +212,6 @@ export default function Profile({ userData, setUser}) {
                 </Button>
               </Grid>
             </Grid>
-          </Box>
-        )}
-
-        {tabIndex === 2 && (
-          <Box>
-            <Typography variant="h6" className="section-title">Order History</Typography>
-            <Typography variant="body2" className="section-subtitle">Not implemented yet</Typography>
           </Box>
         )}
       </Paper>

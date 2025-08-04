@@ -16,6 +16,7 @@ import AdminDashboard from './pages/admin/AdminDashboard.jsx';
 import '/src/App.css';
 import '/src/Admin.css';
 import AdminProducts from './pages/admin/AdminProducts.jsx';
+import AdminOrders from './pages/admin/AdminOrders.jsx';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -98,6 +99,7 @@ function App() {
         <Route element={<AdminRoute isAdmin={user?.role == "admin"}/>}>
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/products" element={<AdminProducts />} />
+          <Route path="/admin/orders" element={<AdminOrders />} />
         </Route>
         
       </Routes>

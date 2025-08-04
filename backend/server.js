@@ -47,7 +47,8 @@ fastify.get('/api/featured-products', async (request, reply) => {
   return db.getFeaturedProducts(); 
 });
 
-fastify.post('/api/product', async (request, reply) => {
+fastify.post('/api/products', async (request, reply) => {
+  validateAdmin(request);
   const product = request.body;
 
   db.createProduct(product, (err, result) => {
@@ -59,7 +60,7 @@ fastify.post('/api/product', async (request, reply) => {
   });
 });
 
-fastify.delete('/api/product/:id', async (request, reply) => {
+fastify.delete('/api/products/:id', async (request, reply) => {
   validateAdmin(request);
   const { id } = request.params;
 
@@ -72,7 +73,7 @@ fastify.delete('/api/product/:id', async (request, reply) => {
   });
 });
 
-fastify.put('/api/product/:id', async (request, reply) => {
+fastify.put('/api/products/:id', async (request, reply) => {
   validateAdmin(request);
 
   const { id } = request.params;
@@ -180,10 +181,16 @@ fastify.get('/api/order-items/:id', async (request, reply) => {
   return orderItems;
 });
 
-fastify.get('/api/admin/getRecentOrders', async (req, reply) => {
+fastify.get('/api/recent-orders', async (req, reply) => {
   validateAdmin(req);
 
   return db.getRecentOrders();
+});
+
+fastify.get('/api/orders', async (request, reply) => {
+  validateAdmin(request)
+
+  return db.getAllOrders(); 
 });
 
 function validateAdmin(req) {

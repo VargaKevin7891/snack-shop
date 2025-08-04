@@ -49,7 +49,6 @@ export function initDb() {
       zip_code TEXT,
       total INTEGER,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      status TEXT,
       FOREIGN KEY (user_id) REFERENCES users(id)
     );
   `).run();
@@ -169,11 +168,27 @@ export function getUserById(id) {
 }
 
 export function getAllOrders() {
-  return db.prepare('SELECT * FROM orders').all();
+  const orders = db.prepare('SELECT * FROM orders ORDER BY id DESC').all();
+
+  for (const order of orders) {
+    order.items = db
+      .prepare('SELECT * FROM order_items WHERE order_id = ?')
+      .all(order.id);
+  }
+
+  return orders;
 }
 
 export function getRecentOrders() {
-  return db.prepare('SELECT * FROM orders ORDER BY id DESC LIMIT 4').all();
+  const orders = db.prepare('SELECT * FROM orders ORDER BY id DESC LIMIT 4').all();
+
+  for (const order of orders) {
+    order.items = db
+      .prepare('SELECT * FROM order_items WHERE order_id = ?')
+      .all(order.id);
+  }
+
+  return orders;
 }
 
 export function getOrder(id) {

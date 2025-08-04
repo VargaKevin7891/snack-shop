@@ -1,6 +1,6 @@
-import { Box, Typography, Paper } from '@mui/material';
+import { Box, Button, Typography, Paper } from '@mui/material';
 
-export default function AdminOrderCard({ id, first_name, last_name, created_at, total, status }) {
+export default function AdminOrderCard({ id, first_name, last_name, created_at, total,  onViewDetails }) {
   return (
     <Paper className="order-card">
       <Box>
@@ -10,6 +10,13 @@ export default function AdminOrderCard({ id, first_name, last_name, created_at, 
       </Box>
       <Box textAlign="right">
         <Typography className="bold">{total} Ft</Typography>
+        <Button
+          size="small"
+          className="admin-product-outline-btn"
+          onClick={onViewDetails}
+        >
+          View Details
+        </Button>
       </Box>
     </Paper>
   );

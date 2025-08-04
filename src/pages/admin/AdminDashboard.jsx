@@ -1,6 +1,6 @@
-import { Container, Box, Typography } from '@mui/material';
+import { Container, Box } from '@mui/material';
 import AdminDashboardCard from '../../components/admin/AdminDashboardCard';
-import RecentOrders from '../../components/admin/AdminDashboardRecentOrders';
+import RecentOrders from '../../components/admin/AdminOrdersList';
 import AdminHeader from '../../components/admin/AdminHeader';
 
 export default function AdminDashboard() {
@@ -12,7 +12,7 @@ export default function AdminDashboard() {
             </Container>
             <Container>
                 <Box>
-                    <RecentOrders />
+                    <RecentOrders isAll={false}/>
                 </Box>
             </Container>
         </Container>
