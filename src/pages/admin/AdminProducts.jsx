@@ -119,7 +119,6 @@ async function handleSaveProduct() {
     try {
       const newEntry = {
         ...newProduct,
-        id: Date.now(),
         price: parseFloat(newProduct.price),
         discount: parseInt(newProduct.discount) || 0,
         stock: parseInt(newProduct.stock) || 0,
@@ -128,6 +127,7 @@ async function handleSaveProduct() {
       const response = await fetch('http://localhost:3001/api/product', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify(newEntry),
       });
 
@@ -145,13 +145,32 @@ async function handleSaveProduct() {
 }
 
 
-   function handleEditProduct(product) {
+  function handleEditProduct(product) {
     const index = products.findIndex((p) => p.id === product.id);
     setIsEditMode(true);
     setEditIndex(index);
     setNewProduct(product);
     setOpen(true);
   }
+
+  async function handleDeleteProduct(id) {
+  try {
+    const response = await fetch(`http://localhost:3001/api/product/${id}`, {
+      method: 'DELETE',
+      credentials: 'include',
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to delete product');
+    }
+
+    setProducts(prev => prev.filter(product => product.id !== id));
+  } catch (error) {
+    console.error(error);
+    alert('Error deleting product');
+  }
+}
+
 
   return (
     <Box className="admin-products-container">
@@ -172,7 +191,7 @@ async function handleSaveProduct() {
 
       <Box className="admin-product-list">
         {filteredProducts.map((product) => (
-          <AdminProductCard key={product.id} product={product} handleEditProduct={handleEditProduct}/>
+          <AdminProductCard key={product.id} product={product} handleEditProduct={handleEditProduct} handleDeleteProduct={handleDeleteProduct}/>
         ))}
       </Box>
 

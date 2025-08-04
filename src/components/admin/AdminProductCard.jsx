@@ -1,6 +1,6 @@
 import { Box, Card, CardContent, Typography, Button } from '@mui/material';
 
-export default function AdminProductCard({ product, handleEditProduct }) {
+export default function AdminProductCard({ product, handleEditProduct, handleDeleteProduct }) {
   return (
     <Card className="admin-product-card" key={product.id}>
         <Box className="admin-product-info">
@@ -22,9 +22,12 @@ export default function AdminProductCard({ product, handleEditProduct }) {
               <Typography>Discount: {product.discount}%</Typography>
               <Typography>Stock: {product.stock}</Typography>
           </CardContent>
-          <Box>
+          <Box className="admin-product-actions">
               <Button className="admin-product-outline-btn" onClick={() => handleEditProduct(product)}>
               Edit
+              </Button>
+              <Button className="admin-product-delete-btn" onClick={() => handleDeleteProduct(product.id)}>
+              Delete
               </Button>
           </Box>
         </Box>

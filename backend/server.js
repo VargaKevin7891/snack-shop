@@ -59,7 +59,22 @@ fastify.post('/api/product', async (request, reply) => {
   });
 });
 
+fastify.delete('/api/product/:id', async (request, reply) => {
+  validateAdmin(request);
+  const { id } = request.params;
+
+  db.deleteProduct(id, (err, result) => {
+    if (err) {
+      console.error(err);
+      return reply.status(500).send({ message: 'Failed to delete product' });
+    }
+    reply.send({ message: 'Product deleted' });
+  });
+});
+
 fastify.put('/api/product/:id', async (request, reply) => {
+  validateAdmin(request);
+
   const { id } = request.params;
   const updatedProduct = { ...request.body, id: parseInt(id) };
 
@@ -166,21 +181,17 @@ fastify.get('/api/order-items/:id', async (request, reply) => {
 });
 
 fastify.get('/api/admin/getRecentOrders', async (req, reply) => {
-  const user = req.session.user;
-  if(!user || user.role !== 'admin') {
-    return reply.code(403).send({error: 'Forbidden'});
-  }
+  validateAdmin(req);
 
   return db.getRecentOrders();
 });
 
-fastify.get('/api/admin-data', async (req, reply) => {
+function validateAdmin(req) {
   const user = req.session.user;
   if (!user || user.role !== 'admin') {
     return reply.code(403).send({ error: 'Forbidden' });
   }
-   reply.send({ secret: 'Admin-only content' });
-});
+}
 
 try {
   await fastify.listen({ port: 3001 }, () => {console.log("Server started successfully!")})

@@ -155,6 +155,10 @@ export function updateProduct(product) {
             .run(product.name, product.category, product.price, product.stock, product.discount, product.description, product.image, product.id);
 }
 
+export function deleteProduct(id) {
+  return db.prepare('DELETE FROM products WHERE id = ?').run(id);
+}
+
 export function getUserByUsername(username) {
   return db.prepare('SELECT * FROM users WHERE username = ?').get(username);
 }

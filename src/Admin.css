@@ -198,10 +198,29 @@
     background-color: var(--color-blue);
 }
 
+.admin-product-delete-btn {
+    color: var(--color-l-red) !important;
+    outline: 1px solid var(--color-l-red) !important;
+}
+
+.admin-product-delete-btn:hover {
+    color: var(--color-white) !important;
+    outline: none !important;
+    background-color: var(--color-d-red);
+}
+
 .admin-product-price {
   color: var(--color-secondary);
   font-weight: 600 !important;
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+.admin-product-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
