@@ -45,10 +45,10 @@ export default function CartItem({ cartItem, quantity, updateQuantity, removeIte
 
               <div className="cart-item-price">
                 <Typography variant="body1">
-                  {((cartItem.discount > 0 ? (cartItem.price - (cartItem.price / cartItem.discount)).toFixed(0) : cartItem.price)
+                  {((cartItem.discount > 0 ? (cartItem.price - (cartItem.price * cartItem.discount / 100)).toFixed(0) : cartItem.price)
                     * quantity)} Ft
                 </Typography>
-                <span>{cartItem.discount > 0 ? (cartItem.price - (cartItem.price / cartItem.discount)).toFixed(0) : cartItem.price} Ft each</span>
+                <span>{cartItem.discount > 0 ? (cartItem.price - (cartItem.price * cartItem.discount / 100)).toFixed(0) : cartItem.price} Ft each</span>
               </div>
 
               <IconButton

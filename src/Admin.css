@@ -1,0 +1,207 @@
+/* Admin.css
+1.Admin NavBar & Header
+2.Dashboard
+3.Products
+*/
+
+/* 1. Admin NavBar & Header*/
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 200px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-right: 1px solid var(--color-grey);
+  padding-top: 4rem;
+  transition: transform 0.3s ease-in-out;
+  z-index: 10;
+}
+
+.sidebar ul li a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.sidebar svg {
+    color: var(--color-white);
+}
+
+.sidebar.closed {
+  transform: translateX(-100%);
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-toggle {
+  position: sticky !important;
+  top: 15px;
+  left: 15px;
+  z-index: 11;
+  background-color: var(--color-secondary) !important;
+  color: var(--color-white) !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.admin-header h4 {
+    font-weight: bold !important;
+}
+
+
+
+/* 2. Dashboard */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dashboard-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 20px;
+}
+
+.box-card {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--color-grey);
+  transition: box-shadow 0.3s ease;
+  height: 100px;
+  width: 200px;
+}
+
+.box-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.box-title {
+  font-weight: 600;
+  color: var(--color-grey);
+  margin-bottom: 6px;
+}
+
+.box-value {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.change-text {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.positive {
+  color: var(--color-green);
+}
+
+.negative {
+  color: var(--color-l-red);
+}
+
+.orders-box {
+  padding: 1.5rem;
+}
+
+.order-card {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+  padding: 20px;
+}
+
+.order-id {
+  font-weight: bold !important;
+}
+
+.view-orders-btn {
+  background-color: var(--color-middle) !important;
+  color: var(--color-white) !important;
+  margin-top: 1rem;
+}
+
+/* 3. Products */
+.admin-products-container {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 1200px;
+}
+
+.admin-product-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  gap: 30px;
+}
+
+.admin-product-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-secondary);
+  height: 150px;
+  width: 350px;
+}
+
+.admin-product-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-product-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.admin-product-btn{
+    background-color: var(--color-middle) !important;
+    color: var(--color-white) !important;   
+}
+
+.admin-product-btn:hover {
+    background-color: var(--color-blue) !important;
+}
+
+.admin-product-outline-btn {
+    color: var(--color-middle) !important;
+    outline: 1px solid var(--color-middle) !important;
+}
+
+.admin-product-outline-btn:hover {
+    color: var(--color-white) !important;
+    outline: none !important;
+    background-color: var(--color-blue);
+}
+
+.admin-product-price {
+  color: var(--color-secondary);
+  font-weight: 600 !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

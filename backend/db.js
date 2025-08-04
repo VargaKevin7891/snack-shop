@@ -49,6 +49,7 @@ export function initDb() {
       zip_code TEXT,
       total INTEGER,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      status TEXT,
       FOREIGN KEY (user_id) REFERENCES users(id)
     );
   `).run();
@@ -144,6 +145,16 @@ export function decreaseProductStock(productId, quantity) {
   return db.prepare('UPDATE products SET stock = stock - ? WHERE id = ?').run(quantity, productId);
 }
 
+export function createProduct(product) {
+  return db.prepare('INSERT INTO products (id, name, category, price, stock, discount, description, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
+            .run(product.id, product.name, product.category, product.price, product.stock, product.discount, product.description, product.image)
+}
+
+export function updateProduct(product) {
+  return db.prepare('UPDATE products SET name = ?, category = ?, price = ?, stock = ?, discount = ?, description = ?, image = ? WHERE id = ?')
+            .run(product.name, product.category, product.price, product.stock, product.discount, product.description, product.image, product.id);
+}
+
 export function getUserByUsername(username) {
   return db.prepare('SELECT * FROM users WHERE username = ?').get(username);
 }
@@ -151,6 +162,14 @@ export function getUserByUsername(username) {
 export function getUserById(id) {
   const query = db.prepare(`SELECT * FROM users WHERE id = ?`);
   return query.get(id);
+}
+
+export function getAllOrders() {
+  return db.prepare('SELECT * FROM orders').all();
+}
+
+export function getRecentOrders() {
+  return db.prepare('SELECT * FROM orders ORDER BY id DESC LIMIT 4').all();
 }
 
 export function getOrder(id) {
@@ -174,13 +193,13 @@ export function updateUserProfile(id, profileData) {
     WHERE id = ?
   `);
   return query.run(
-    profileData.firstName,
-    profileData.lastName,
+    profileData.first_name,
+    profileData.last_name,
     profileData.email,
     profileData.phone,
     profileData.address,
     profileData.city,
-    profileData.zipCode,
+    profileData.zip_code,
     id
   );
 }
@@ -232,7 +251,7 @@ export function insertOrderItems(orderId, items) {
         product.name,
         product.image || '',
         quantity,
-        (product.discount <= 0 ? product.price : (product.price - (product.price / product.discount)).toFixed(0)),
+        (product.discount <= 0 ? product.price : (product.price - (product.price * product.discount / 100)).toFixed(0)),
       );
     }
   });

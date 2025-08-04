@@ -7,12 +7,15 @@ import Product from './pages/Product.jsx';
 import ProductList from './pages/ProductList.jsx';
 import Login from './pages/Login.jsx';
 import Profile from './pages/Profile.jsx';
-import '/src/App.css'
 import Register from './pages/Register.jsx';
 import Cart from './pages/Cart.jsx';
 import Checkout from './pages/Checkout.jsx';
 import OrderConfirmation from './pages/OrderConfirmation.jsx';
 import { PrivateRoute, AdminRoute } from './RouterControll.jsx';
+import AdminDashboard from './pages/admin/AdminDashboard.jsx';
+import '/src/App.css';
+import '/src/Admin.css';
+import AdminProducts from './pages/admin/AdminProducts.jsx';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -20,7 +23,7 @@ function App() {
   const [cartCount, setCartCount] = useState(0);
 
   let subtotal = cartItems.reduce((sum, [product, quantity]) => {
-    const price = (product.discount > 0 ? (product.price - (product.price / product.discount)) : product.price).toFixed(0);
+    const price = (product.discount > 0 ? (product.price - (product.price * product.discount / 100)) : product.price).toFixed(0);
     return sum + (price * quantity);
   }, 0);
   const tax = subtotal * 0.25;
@@ -73,7 +76,7 @@ function App() {
 
   return (
     <Router>
-      <Header cartCount={cartCount} userData={user} onLogout={onLogout}/>
+      <Header cartCount={cartCount} userData={user} onLogout={onLogout} isAdmin={user?.role == "admin"}/>
       <Routes>
         {/* Public routes */}
         <Route path="/login" element={<Login setUser={setUser}/>} />
@@ -82,7 +85,7 @@ function App() {
         {/* Private routes */}
         <Route element={<PrivateRoute isAllowed={!!user}/>}>
           <Route path="/" element={<Home />}/>        
-          <Route path="/profile" element={<Profile userData={user} />}/>
+          <Route path="/profile" element={<Profile userData={user} setUser={setUser} />}/>
           <Route path="/product" element={<Product addToCart={addToCart}/>} />
           <Route path="/products" element={<ProductList />}/>
           <Route path="/cart" element={<Cart cartCount={cartCount} cartItems={cartItems} updateQuantity={updateQuantity} clearCart={clearCart} removeItem={removeItem} subtotal={subtotal} tax={tax} total={total} />} />
@@ -93,12 +96,12 @@ function App() {
 
         {/* Admin routes */}
         <Route element={<AdminRoute isAdmin={user?.role == "admin"}/>}>
-          <Route path="/admin" element={<h1>Admin page!</h1>} />
-          <Route path="/admin/page" element={<h1>Admin Page-page!</h1>} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/products" element={<AdminProducts />} />
         </Route>
         
       </Routes>
-      <Footer />
+      <Footer isAdmin={user?.role == "admin"}/>
     </Router>
   )
 }

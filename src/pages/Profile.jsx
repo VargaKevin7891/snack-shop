@@ -11,7 +11,7 @@ import {
   Button,
 } from '@mui/material';
 
-export default function Profile() {
+export default function Profile({ userData, setUser}) {
   const [tabIndex, setTabIndex] = useState(0);
   const [profile, setProfile] = useState({
     first_name: '',
@@ -41,13 +41,8 @@ export default function Profile() {
   };
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/getUser', {
-      credentials: 'include',
-    })
-      .then(res => res.json())
-      .then(data => setProfile(data))
-      .catch(err => setError('Failed to load profile info'));
-  }, []);
+     setProfile(userData);
+  }, [userData]);
 
   async function handleSaveProfile() {
     try {
@@ -59,6 +54,10 @@ export default function Profile() {
       });
       const data = await res.json();
       if (res.ok) {
+        setUser(prev => ({
+          ...prev,
+          ...profile,
+        }));
         setMessage('Profile updated successfully');
         setError('');
       } else {

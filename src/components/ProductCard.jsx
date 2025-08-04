@@ -27,7 +27,7 @@ export default function ProductCard (product) {
           <div className="price">
             {product.discount > 0 ? 
             (<>
-                <span className="new">{(product.price - (product.price / product.discount)).toFixed(0)} Ft</span>
+                <span className="new">{(product.price - (product.price * product.discount / 100)).toFixed(0)} Ft</span>
                 <span className="old">{product.price} Ft</span>
             </>)
             :

@@ -1,8 +1,7 @@
 import {
   Card,
   CardContent,
-  Typography,
-  IconButton
+  Typography
 } from '@mui/material';
 
 export default function OrderItem({ orderItem }) {

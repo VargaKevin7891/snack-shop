@@ -66,13 +66,13 @@ export default function ProductPage(props) {
         {product.discount > 0 ?
           (<>
           <Typography variant="h5" className="product-price">
-            ${(product.price - (product.price / product.discount)).toFixed(0)} <span className="original-price">{product.price} Ft</span>
+            {(product.price - (product.price * product.discount / 100)).toFixed(0)} Ft <span className="original-price">{product.price} Ft</span>
           </Typography>
           
           </>)
           :
           (<Typography variant="h5" className="product-price">
-            ${product.price}
+            {product.price} Ft
           </Typography>)
         }
         

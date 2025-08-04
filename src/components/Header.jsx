@@ -14,6 +14,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  ListItemIcon,
   InputBase,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -22,8 +23,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 import logo from "/snackshop_logo.png"
+import { Dashboard, Inventory, ShoppingCart, Group, Logout } from '@mui/icons-material';
 
-const categories = ['Home', 'Products', 'Salty Snack', 'Sweet Snack', 'Healthy Snacks', 'About Us', 'Deals'];
+const categories = ['Home', 'Products', 'Salty Snack', 'Sweet Snack', 'Healthy Snacks'];
 
 export default function Header(props) {
   const [profileOpen, setProfileOpen] = useState(false);
@@ -31,6 +33,11 @@ export default function Header(props) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [user, setUser] = useState(props.userData);
   const navigate = useNavigate();
+  const [isSidebarOpen, setSidebarOpen] = useState(true);
+
+  function toggleSidebar() {
+    setSidebarOpen(!isSidebarOpen)
+  };
 
   useEffect(() => {
     setUser(props.userData);
@@ -74,6 +81,49 @@ const handleLogout = async () => {
     props.onLogout();
     navigate('/');
   };
+
+  
+
+  if(props.isAdmin){
+   return (
+    <>
+      <IconButton className="sidebar-toggle" onClick={toggleSidebar}>
+        <MenuIcon />
+      </IconButton>
+
+      <Box className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
+        <List>
+          <ListItem>
+            <Link to="/admin">
+              <ListItemIcon><Dashboard /></ListItemIcon>
+              <ListItemText primary="Dashboard" />
+            </Link>      
+          </ListItem>
+          <ListItem>
+            <Link to="/admin/products">
+              <ListItemIcon><Inventory /></ListItemIcon>
+              <ListItemText primary="Products" />
+            </Link>
+          </ListItem>
+          <ListItem>
+            <ListItemIcon><ShoppingCart /></ListItemIcon>
+            <ListItemText primary="Orders" />
+          </ListItem>
+          <ListItem>
+            <ListItemIcon><Group /></ListItemIcon>
+            <ListItemText primary="Customers" />
+          </ListItem>
+          <ListItem>
+            <Link onClick={handleLogout}>
+              <ListItemIcon><Logout /></ListItemIcon>
+              <ListItemText primary="Logout" />
+            </Link>
+          </ListItem>
+        </List>
+      </Box>
+    </>
+    )
+  }
 
   return (
     <Box className="navbar">

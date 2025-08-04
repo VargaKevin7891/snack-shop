@@ -4,7 +4,9 @@ import { Facebook, Twitter, YouTube, LinkedIn } from '@mui/icons-material';
 import { Send } from '@mui/icons-material';
 import logo from "/snackshop_logo.png"
 
-export default function Footer() {
+export default function Footer( { isAdmin }) {
+  if(isAdmin) return null;
+
   return (
     <Box className="footer">
       <Grid container spacing={4} className="footer-container">

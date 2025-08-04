@@ -47,6 +47,31 @@ fastify.get('/api/featured-products', async (request, reply) => {
   return db.getFeaturedProducts(); 
 });
 
+fastify.post('/api/product', async (request, reply) => {
+  const product = request.body;
+
+  db.createProduct(product, (err, result) => {
+    if (err) {
+      console.error(err);
+      return reply.status(500).send({ message: 'Failed to create product' });
+    }
+    reply.send({ message: 'Product created', id: result.id });
+  });
+});
+
+fastify.put('/api/product/:id', async (request, reply) => {
+  const { id } = request.params;
+  const updatedProduct = { ...request.body, id: parseInt(id) };
+
+  db.updateProduct(updatedProduct, (err, result) => {
+    if (err) {
+      console.error(err);
+      return reply.status(500).send({ message: 'Failed to update product' });
+    }
+    reply.send({ message: 'Product updated' });
+  });
+});
+
 fastify.post('/api/login', async (req, reply) => {
   const { username, password } = req.body;
   const user = await loginUser(username, password);
@@ -138,6 +163,15 @@ fastify.get('/api/order-items/:id', async (request, reply) => {
   }
 
   return orderItems;
+});
+
+fastify.get('/api/admin/getRecentOrders', async (req, reply) => {
+  const user = req.session.user;
+  if(!user || user.role !== 'admin') {
+    return reply.code(403).send({error: 'Forbidden'});
+  }
+
+  return db.getRecentOrders();
 });
 
 fastify.get('/api/admin-data', async (req, reply) => {
